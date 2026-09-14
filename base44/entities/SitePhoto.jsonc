@@ -1,0 +1,93 @@
+{
+  "name": "SitePhoto",
+  "type": "object",
+  "properties": {
+    "file_url": {
+      "type": "string",
+      "description": "Public URL of the stored image"
+    },
+    "thumbnail_url": {
+      "type": "string",
+      "description": "Smaller thumbnail URL for grid views"
+    },
+    "taken_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp the photo was taken (from EXIF/metadata)"
+    },
+    "latitude": {
+      "type": "number",
+      "description": "GPS latitude"
+    },
+    "longitude": {
+      "type": "number",
+      "description": "GPS longitude"
+    },
+    "location_name": {
+      "type": "string",
+      "default": "Junglinster"
+    },
+    "phase": {
+      "type": "string",
+      "enum": [
+        "planning",
+        "foundation",
+        "structure",
+        "roofing",
+        "facade",
+        "interior",
+        "exterior",
+        "landscaping",
+        "other"
+      ],
+      "description": "Construction phase tag"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "google_drive",
+        "manual"
+      ],
+      "default": "manual"
+    },
+    "external_id": {
+      "type": "string",
+      "description": "Google Drive file id, used for dedup"
+    },
+    "caption": {
+      "type": "string",
+      "description": "Original file name or short caption"
+    }
+  },
+  "required": [
+    "file_url"
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
