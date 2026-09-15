@@ -8,7 +8,7 @@ export const PHASES = [
   "exterior",
   "landscaping",
   "appartment",
-  "incident"
+  "incident",
   "other",
 ];
 
