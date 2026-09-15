@@ -14,7 +14,7 @@ export default function SiteHeader() {
             <HardHat className="h-5 w-5 text-[#F59E0B]" />
           </div>
           <span className="font-display text-[0.95rem] font-bold uppercase tracking-wide text-white">
-            Junglinster Construction Site Tracker
+            Project: LIVIO Construction Site Tracker
           </span>
         </Link>
 
