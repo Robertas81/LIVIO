@@ -8,6 +8,7 @@ export const PHASES = [
   "exterior",
   "landscaping",
   "appartment",
+  "incident"
   "other",
 ];
 
@@ -21,6 +22,7 @@ export const PHASE_LABELS = {
   exterior: "Exterior",
   landscaping: "Landscaping",
   appartment: "Appartment",
+  incident: "Incident",
   other: "Other",
 };
 
