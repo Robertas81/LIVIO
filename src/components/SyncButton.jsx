@@ -11,14 +11,14 @@ export default function SyncButton({ onSynced }) {
     setResult(null);
     try {
       const res = await base44.functions.invoke("syncGoogleDrivePhotos", {});
-      setResult(res.data || {});
+      setResult(res.data || res || {});
       onSynced && onSynced();
     } catch (e) {
       setResult({
         error:
           (e && e.response && e.response.data && e.response.data.error) ||
           e.message ||
-          "Sync failed. Make sure Google Drive is connected.",
+          "Sync failed.",
       });
     }
     setSyncing(false);
