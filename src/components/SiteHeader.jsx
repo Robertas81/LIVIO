@@ -22,7 +22,7 @@ export default function SiteHeader() {
         <div className="hidden items-center gap-1.5 rounded-[4px] border border-white/10 bg-white/5 px-2 py-1 sm:inline-flex">
           <span className="h-1.5 w-1.5 rounded-full bg-[#22C55E]" />
           <span className="font-mono text-[0.7rem] font-medium tracking-wide text-[#94A3B8]">
-            LIVIO-2020-12-STARTED
+            LIVIO-2020-12-SIGNED
           </span>
         </div>
 
