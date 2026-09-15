@@ -1,10 +1,22 @@
 import { Link } from "react-router-dom";
 import { HardHat, LogOut } from "lucide-react";
 import { useAuth } from "@/lib/AuthContext";
+import { useMemo } from "react";
 
 export default function SiteHeader() {
   const { user, logout } = useAuth();
   const email = user?.email || "";
+
+  // Dynamically calculate the duration in months from Dec 2020 to now
+  const constructionDuration = useMemo(() => {
+    const startDate = new Date(2020, 11); // 11 is December (0-indexed months)
+    const currentDate = new Date();
+    
+    const yearsDiff = currentDate.getFullYear() - startDate.getFullYear();
+    const monthsDiff = currentDate.getMonth() - startDate.getMonth();
+    
+    return yearsDiff * 12 + monthsDiff;
+  }, []);
 
   return (
     <header className="sticky top-0 z-20 h-14 bg-[#0F172A] text-white">
@@ -23,6 +35,14 @@ export default function SiteHeader() {
           <span className="h-1.5 w-1.5 rounded-full bg-[#22C55E]" />
           <span className="font-mono text-[0.7rem] font-medium tracking-wide text-[#94A3B8]">
             LIVIO-2020-12-SIGNED
+          </span>
+        </div>
+
+        {/* Construction duration red indicator */}
+        <div className="hidden items-center gap-1.5 rounded-[4px] border border-white/10 bg-white/5 px-2 py-1 sm:inline-flex">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#EF4444]" />
+          <span className="font-mono text-[0.7rem] font-medium tracking-wide text-[#94A3B8]">
+            DURATION: {constructionDuration} MONTHS
           </span>
         </div>
 
