@@ -7,8 +7,9 @@
 // 2024-05-12 15.30.45, 2024.05.12T15:30:45, etc.
 export function dateFromFilename(filename) {
   if (!filename) return null;
+  // Also handles WhatsApp-style names: "WhatsApp Image 2026-09-05 at 19.21.50.jpeg"
   const m = filename.match(
-    /((?:19|20)\d{2})[-_. T]?(\d{2})[-_. T]?(\d{2})(?:[-_. T](\d{2})[-_:.]?(\d{2})[-_:.]?(\d{2}))?/
+    /((?:19|20)\d{2})[-_. T]?(\d{2})[-_. T]?(\d{2})(?:[-_. T]*(?:at)?[-_. T]*(\d{2})[-_:.]?(\d{2})[-_:.]?(\d{2}))?/
   );
   if (!m) return null;
   const month = parseInt(m[2], 10);
