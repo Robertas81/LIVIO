@@ -94,10 +94,12 @@ export const Comment = {
 
 // File upload helper — replaces base44.integrations.Core.UploadPublicFile
 export async function uploadPublicFile({file}) {
-  const fileName = `photos/${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`;
+  const ext = file.name ? file.name.split('.').pop() : 'jpg';
+  const safeName = file.name || `upload.${ext}`;
+  const fileName = `photos/${Date.now()}-${Math.random().toString(36).slice(2)}-${safeName}`;
   const { data, error } = await supabase.storage
     .from('photos')
-    .upload(fileName, file, { contentType: file.type, upsert: false });
+    .upload(fileName, file, { contentType: file.type || `image/${ext}`, upsert: false });
   if (error) throw error;
   const { data: urlData } = supabase.storage.from('photos').getPublicUrl(fileName);
   return { file_url: urlData.publicUrl };
