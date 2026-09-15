@@ -93,11 +93,14 @@ export const Comment = {
 };
 
 // File upload helper — replaces base44.integrations.Core.UploadPublicFile
-export async function uploadPublicFile({file}) {
-  const ext = file.name ? file.name.split('.').pop() : 'jpg';
-  const safeName = file.name || `upload.${ext}`;
+// Accepts both { file } (Base44 convention) and a raw File object.
+export async function uploadPublicFile(arg) {
+  const file = arg?.file || arg;
+  if (!file) throw new Error('No file provided');
+  const ext = (file.name || '').split('.').pop() || 'jpg';
+  const safeName = (file.name || `upload.${ext}`).replace(/[^a-zA-Z0-9._-]/g, '_');
   const fileName = `photos/${Date.now()}-${Math.random().toString(36).slice(2)}-${safeName}`;
-  const { data, error } = await supabase.storage
+  const { error } = await supabase.storage
     .from('photos')
     .upload(fileName, file, { contentType: file.type || `image/${ext}`, upsert: false });
   if (error) throw error;
