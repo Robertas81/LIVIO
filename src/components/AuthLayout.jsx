@@ -22,7 +22,7 @@ export default function AuthLayout({ title, subtitle, footer, children }) {
               <div className="mt-3 inline-flex items-center gap-1.5 rounded-[4px] border border-[#E1E4E8] bg-[#F4F5F6] px-2 py-1">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#22C55E]" />
                 <span className="font-mono text-[0.75rem] font-medium tracking-wide text-[#64748B]">
-                  LIVIO-2020-12-STARTED
+                  LIVIO-2020-12-SIGNED
                 </span>
               </div>
             </div>
