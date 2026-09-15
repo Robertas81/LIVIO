@@ -3,7 +3,7 @@ import { base44 } from "@/api/base44Client";
 import PhaseFilter, { PHASE_LABELS, PHASES } from "@/components/PhaseFilter";
 import PhotoCard from "@/components/PhotoCard";
 import UploadButton from "@/components/UploadButton";
-import SyncButton from "@/components/SyncButton";
+import VerticalTimeline, { matchesMonth } from "@/components/VerticalTimeline";
 import EmptyState from "@/components/EmptyState";
 
 function groupByMonth(photos) {
@@ -22,6 +22,7 @@ export default function Home() {
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [phase, setPhase] = useState(null);
+  const [selectedMonth, setSelectedMonth] = useState(null);
 
   const load = async () => {
     setLoading(true);
@@ -38,7 +39,8 @@ export default function Home() {
     load();
   }, []);
 
-  const filtered = phase ? photos.filter((p) => p.phase === phase) : photos;
+  const byPhase = phase ? photos.filter((p) => p.phase === phase) : photos;
+  const filtered = byPhase.filter((p) => matchesMonth(p, selectedMonth));
   const groups = groupByMonth(filtered);
   const groupKeys = Object.keys(groups);
 
@@ -54,24 +56,32 @@ export default function Home() {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <SyncButton onSynced={load} />
           <UploadButton onUploaded={load} />
         </div>
       </div>
 
       <PhaseFilter active={phase} onChange={setPhase} />
 
-      {loading ? (
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[260px_1fr]">
+        <VerticalTimeline photos={byPhase} value={selectedMonth} onChange={setSelectedMonth} />
+        {loading ? (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="aspect-[4/3] animate-pulse rounded-xl bg-stone-200" />
           ))}
         </div>
       ) : filtered.length === 0 ? (
-        <EmptyState
-          title="No photos yet"
-          description="Sync from Google Drive or upload photos directly to start building the Junglinster construction timeline."
-        />
+        photos.length ? (
+          <EmptyState
+            title="No photos in this selection"
+            description="Try a different construction phase or time period."
+          />
+        ) : (
+          <EmptyState
+            title="No photos yet"
+            description="Upload photos directly to start building the Junglinster construction timeline."
+          />
+        )
       ) : (
         <div className="space-y-10">
           {groupKeys.map((key) => (
@@ -90,8 +100,9 @@ export default function Home() {
               </div>
             </section>
           ))}
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
