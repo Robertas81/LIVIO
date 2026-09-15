@@ -16,13 +16,13 @@ export default function AuthLayout({ title, subtitle, footer, children }) {
                   <HardHat className="h-5 w-5 text-[#F59E0B]" />
                 </div>
                 <h1 className="font-display text-[1.25rem] font-bold uppercase leading-none tracking-tight text-[#0F172A]">
-                  Junglinster Site Tracker
+                  Project: LIVIO Construction Site Tracker
                 </h1>
               </div>
               <div className="mt-3 inline-flex items-center gap-1.5 rounded-[4px] border border-[#E1E4E8] bg-[#F4F5F6] px-2 py-1">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#22C55E]" />
                 <span className="font-mono text-[0.75rem] font-medium tracking-wide text-[#64748B]">
-                  JNG-2024-ST
+                  LIVIO-2020-12-STARTED
                 </span>
               </div>
             </div>
