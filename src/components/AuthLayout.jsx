@@ -24,16 +24,7 @@ export default function AuthLayout({ title, subtitle, footer, children }) {
                 <span className="font-mono text-[0.75rem] font-medium tracking-wide text-[#64748B]">
                   LIVIO-2020-12-SIGNED
                 </span>
-              </div>
-
-        {/* Construction duration red indicator */}
-        <div className="hidden items-center gap-1.5 rounded-[4px] border border-white/10 bg-white/5 px-2 py-1 sm:inline-flex">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#EF4444]" />
-          <span className="font-mono text-[0.7rem] font-medium tracking-wide text-[#94A3B8]">
-            DURATION: {constructionDuration} MONTHS
-          </span>
-        </div>
-                            
+              </div>                 
             </div>
 
             {/* Page title */}
