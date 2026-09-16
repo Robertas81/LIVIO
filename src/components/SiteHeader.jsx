@@ -1,22 +1,10 @@
 import { Link } from "react-router-dom";
 import { HardHat, LogOut } from "lucide-react";
 import { useAuth } from "@/lib/AuthContext";
-import { useMemo } from "react";
 
 export default function SiteHeader() {
   const { user, logout } = useAuth();
   const email = user?.email || "";
-
-  // Dynamically calculate the duration in months from Dec 2020 to now
-  const constructionDuration = useMemo(() => {
-    const startDate = new Date(2020, 11); // 11 is December (0-indexed months)
-    const currentDate = new Date();
-    
-    const yearsDiff = currentDate.getFullYear() - startDate.getFullYear();
-    const monthsDiff = currentDate.getMonth() - startDate.getMonth();
-    
-    return yearsDiff * 12 + monthsDiff;
-  }, []);
 
   return (
     <header className="sticky top-0 z-20 h-14 bg-[#0F172A] text-white">
